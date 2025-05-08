@@ -1,6 +1,7 @@
 import AdmZip from 'adm-zip';
 import fs, { createWriteStream } from 'fs';
 import fetch from 'node-fetch';
+import { platform } from 'os';
 import path from 'path';
 import { pipeline } from 'stream';
 import { promisify } from 'util';
@@ -8,7 +9,7 @@ import { promisify } from 'util';
 const destPath = "bin";
 
 function getLatestReleaseUrl() {
-    return 'https://api.github.com/repos/rojo-rbx/rojo/releases/latest';
+    return 'https://api.github.com/repos/rojo-rbx/rokit/releases/latest';
 }
 
 // Fetch latest release data
@@ -17,15 +18,16 @@ const data = await response.json();
 const version = data.tag_name.replace(/^v/, ''); // Remove 'v' prefix if present
 console.log(`Downloading version: ${version}`);
 
+
 const assets = new Map();
 
 for (const asset of data.assets) {
     const name = asset.name.toLowerCase();
     if (name.includes('win32') || name.includes('windows')) {
         assets.set('win32', asset);
-    } else if (name.includes('linux') || name.includes('ubuntu')) {
+    } else if (name.includes('linux')) {
         assets.set('linux', asset);
-    } else if (name.includes('arm') || name.includes('aarch')) {
+    } else if (name.includes('macos-aarch')) {
         assets.set('arm64', asset);
     } else if (name.includes('macos') || name.includes('darwin')) {
         assets.set('darwin', asset);
@@ -55,6 +57,6 @@ const versionInfo = {
     downloadedAt: new Date().toISOString()
 };
 fs.writeFileSync(
-    path.join(destPath, 'version.json'), 
+    path.join(destPath, 'version.json'),
     JSON.stringify(versionInfo, null, 2)
 );

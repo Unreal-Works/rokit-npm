@@ -16,10 +16,10 @@ export async function getBinaryPath() {
     let binaryName: string;
     switch (process.platform) {
         case 'win32':
-            binaryName = "rojo.exe";
+            binaryName = "rokit.exe";
             break;
         default:
-            binaryName = "rojo";
+            binaryName = "rokit";
             break;
     }
     const binary = files.find(file => file.isFile() && file.name.includes(binaryName));

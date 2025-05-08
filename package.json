@@ -1,18 +1,18 @@
 {
-    "name": "rojo",
-    "version": "1.0.0+rojo7.5.1",
-    "description": "Rojo on NPM. Usage: `npx rojo`",
+    "name": "rokit-npm",
+    "version": "1.0.0+rokit1.0.0",
+    "description": "Rokit on NPM. Usage: `npx rokit`",
     "main": "dist/main.js",
     "bin": {
-        "rojo": "dist/main.js"
+        "rokit": "dist/main.js"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Unreal-Works/rojo-npm.git"
+        "url": "https://github.com/Unreal-Works/rokit-npm.git"
     },
-    "homepage": "https://github.com/Unreal-Works/rojo-npm/README.md",
+    "homepage": "https://github.com/Unreal-Works/rokit-npm/README.md",
     "bugs": {
-        "url": "https://github.com/Unreal-Works/rojo-npm/issues"
+        "url": "https://github.com/Unreal-Works/rokit-npm/issues"
     },
     "scripts": {
         "build": "tsc",
@@ -23,7 +23,7 @@
         "download-binaries": "node scripts/downloader.mjs"
     },
     "keywords": [
-        "rojo",
+        "rokit",
         "roblox",
         "cli"
     ],

@@ -40,7 +40,7 @@ describe('getBinaryPath', () => {
         Object.defineProperty(process, 'platform', { value: 'win32' });
 
         const mockFiles = [
-            { name: 'rojo.exe', isFile: () => true },
+            { name: 'rokit.exe', isFile: () => true },
             { name: 'other-file.txt', isFile: () => true }
         ];
 
@@ -49,7 +49,7 @@ describe('getBinaryPath', () => {
         const result = await main.getBinaryPath();
 
         expect(path.join).toHaveBeenCalledWith(expect.any(String), '..', 'bin', 'win32');
-        expect(result).toContain('rojo.exe');
+        expect(result).toContain('rokit.exe');
 
         // Restore original platform
         Object.defineProperty(process, 'platform', { value: originalPlatform });
@@ -61,7 +61,7 @@ describe('getBinaryPath', () => {
         Object.defineProperty(process, 'platform', { value: 'linux' });
 
         const mockFiles = [
-            { name: 'rojo', isFile: () => true },
+            { name: 'rokit', isFile: () => true },
             { name: 'other-file', isFile: () => true }
         ];
 
@@ -70,7 +70,7 @@ describe('getBinaryPath', () => {
         const result = await main.getBinaryPath();
 
         expect(path.join).toHaveBeenCalledWith(expect.any(String), '..', 'bin', 'linux');
-        expect(result).toContain('rojo');
+        expect(result).toContain('rokit');
 
         // Restore original platform
         Object.defineProperty(process, 'platform', { value: originalPlatform });
@@ -82,7 +82,7 @@ describe('getBinaryPath', () => {
         Object.defineProperty(process, 'platform', { value: 'darwin' });
 
         const mockFiles = [
-            { name: 'rojo', isFile: () => true },
+            { name: 'rokit', isFile: () => true },
             { name: 'other-file', isFile: () => true }
         ];
 
@@ -91,7 +91,7 @@ describe('getBinaryPath', () => {
         const result = await main.getBinaryPath();
 
         expect(path.join).toHaveBeenCalledWith(expect.any(String), '..', 'bin', 'darwin');
-        expect(result).toContain('rojo');
+        expect(result).toContain('rokit');
 
         // Restore original platform
         Object.defineProperty(process, 'platform', { value: originalPlatform });
@@ -102,7 +102,7 @@ describe('getBinaryPath', () => {
         Object.defineProperty(process, 'platform', { value: 'win32' });
 
         const mockFiles = [
-            { name: 'not-rojo.txt', isFile: () => true }
+            { name: 'not-rokit.txt', isFile: () => true }
         ];
 
         (fs.readdir as jest.Mock).mockResolvedValue(mockFiles);
@@ -129,7 +129,7 @@ describe('main', () => {
         
         // Setup default platform and fs.readdir mock for all tests
         const mockFiles = [
-            { name: 'rojo.exe', isFile: () => true },
+            { name: 'rokit.exe', isFile: () => true },
             { name: 'other-file.txt', isFile: () => true }
         ];
         (fs.readdir as jest.Mock).mockResolvedValue(mockFiles);
@@ -141,7 +141,7 @@ describe('main', () => {
     test('should spawn binary with correct arguments', async () => {
         const binaryPath = await main.getBinaryPath();
         
-        process.argv = ['npx', 'rojo', 'serve', '--port=8080'];
+        process.argv = ['npx', 'rokit', 'serve', '--port=8080'];
 
         // Create mock for child process
         const mockOn = jest.fn();
@@ -164,7 +164,7 @@ describe('main', () => {
 
     test('should reject when process exits with non-zero code', async () => {
         // Setup mock path
-        const mockPath = '/mock/path/to/rojo';
+        const mockPath = '/mock/path/to/rokit';
         jest.spyOn(main, 'getBinaryPath').mockResolvedValue(mockPath);
 
         // Create mock for child process
@@ -183,7 +183,7 @@ describe('main', () => {
 
     test('should resolve when process exits with code 2 (special case)', async () => {
         // Setup mock path
-        const mockPath = '/mock/path/to/rojo';
+        const mockPath = '/mock/path/to/rokit';
         jest.spyOn(main, 'getBinaryPath').mockResolvedValue(mockPath);
 
         // Create mock for child process
@@ -202,7 +202,7 @@ describe('main', () => {
 
     test('should reject when process emits error', async () => {
         // Setup mock path
-        const mockPath = '/mock/path/to/rojo';
+        const mockPath = '/mock/path/to/rokit';
         jest.spyOn(main, 'getBinaryPath').mockResolvedValue(mockPath);
 
         // Create mock for child process

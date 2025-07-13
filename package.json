@@ -1,6 +1,6 @@
 {
     "name": "rokit-npm",
-    "version": "1.0.0+rokit1.0.0",
+    "version": "1.0.1",
     "description": "Rokit on NPM. Usage: `npx rokit`",
     "main": "dist/main.js",
     "bin": {
